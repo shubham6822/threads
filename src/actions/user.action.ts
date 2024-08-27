@@ -8,29 +8,25 @@ import { revalidatePath } from "next/cache";
 import User from "../models/user.model";
 import { connectToDB } from "@/lib/dbconnect";
 
-// import { connectToDB } from "../mongoose";
 
-// export async function fetchUser(userId: string) {
-//     try {
-//         connectToDB();
+export async function fetchUser(userId: string) {
+    try {
+        connectToDB();
 
-//         return await User.findOne({ id: userId }).populate({
-//             path: "communities",
-//             model: Community,
-//         });
-//     } catch (error: any) {
-//         throw new Error(`Failed to fetch user: ${error.message}`);
-//     }
-// }
+        return await User.findOne({ id: userId });
+    } catch (error: any) {
+        throw new Error(`Failed to fetch user: ${error.message}`);
+    }
+}
 
-// interface Params {
-//     userId: string;
-//     username: string;
-//     name: string;
-//     bio: string;
-//     image: string;
-//     path: string;
-// }
+interface Params {
+    userId: string;
+    username: string;
+    name: string;
+    bio: string;
+    image: string;
+    path: string;
+}
 
 export async function updateUser({
     userId,
@@ -39,14 +35,7 @@ export async function updateUser({
     path,
     username,
     image,
-}: {
-    userId: string;
-    bio: string;
-    name: string;
-    path: string;
-    username: string;
-    image: string;
-}): Promise<void> {
+}: Params): Promise<void> {
     try {
         connectToDB();
 
