@@ -1,8 +1,8 @@
 import { fetchUser } from "@/actions/user.action";
+import PostThread from "@/components/forms/PostThread";
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
-// import PostThread from "@/components/forms/PostThread";
 
 async function Page() {
     const user = await currentUser();
@@ -16,7 +16,7 @@ async function Page() {
         <>
             <h1 className='head-text'>Create Thread</h1>
 
-            {/* <PostThread userId={userInfo._id} /> */}
+            <PostThread userId={userInfo._id} />
         </>
     );
 }
